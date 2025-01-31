@@ -4,7 +4,6 @@ import { useProductStore } from "@/stores/productStore";
 import { ReadProductDto } from "@/types/product/ReadProductDto";
 import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
-import LoadingSpinner from "../layout/LoadingSpinner";
 import EditButton from "../utils/EditButton";
 import DeleteButton from "../utils/DeleteButton";
 
