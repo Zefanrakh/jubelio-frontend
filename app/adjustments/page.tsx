@@ -48,7 +48,7 @@ const AdjustmentTable = () => {
         <LoadingSpinnerContainer />
       ) : (
         <>
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-4 flex-wrap">
             <h1 className="text-2xl font-bold text-green-900">Adjustments</h1>
             <CreateAdjustmentButton />
           </div>
