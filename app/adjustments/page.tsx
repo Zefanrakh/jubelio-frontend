@@ -2,7 +2,7 @@
 
 import { useAdjustmentStore } from "@/stores/adjustmentStore";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import style from "@/styles/adjustments/AdjustmentTable.module.scss";
 import OneCellAdjustment from "@/components/adjustments/OneCellAdjustment";
 import AdjustmentAction from "@/components/adjustments/AdjustmentAction";
