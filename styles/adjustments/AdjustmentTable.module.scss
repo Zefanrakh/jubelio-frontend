@@ -1,0 +1,36 @@
+.adjustmentTable {
+  table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity, 1));
+
+  tr {
+    cursor: pointer;
+  }
+
+  th:nth-child(1),
+  td:nth-child(1) {
+    @media only screen and (max-width: 375px) {
+      display: none;
+    }
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    display: none;
+
+    @media only screen and (max-width: 768px) {
+      display: table-cell;
+    }
+  }
+
+  th:nth-child(n + 3),
+  td:nth-child(n + 3) {
+    @media only screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+}

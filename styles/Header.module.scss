@@ -1,0 +1,36 @@
+.header {
+  background-color: var(--teal_900);
+  position: fixed;
+  height: 60px;
+  width: 120vw;
+  right: 0;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 10px;
+  z-index: 1;
+  justify-content: end;
+
+  button {
+    position: fixed;
+    left: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      filter: brightness(0.6);
+    }
+  }
+
+  p {
+    font-size: 36px;
+    font-weight: bolder;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-stroke: 0.9px var(--_ffffff) !important;
+    paint-order: stroke fill !important;
+    color: transparent;
+
+    @media only screen and (max-width: 540px) {
+      font-size: 30px;
+    }
+  }
+}

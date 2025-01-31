@@ -1,0 +1,118 @@
+/* ------ Color variables ------ */
+:root {
+  --_ffffff: #ffffff;
+  --black_900_14: #00000014;
+  --black_900_1e: #0000001e;
+  --blue_gray_700_9e: #3e695f9e;
+  --blue_gray_900: #333333;
+  --gray_100: #f5f5f5;
+  --gray_200: #eaeaea;
+  --gray_400: #c4c4c4;
+  --gray_600: #757575;
+  --gray_900: #1c1c1c;
+  --teal_100: #b3e5da;
+  --teal_300: #5bc8af;
+  --teal_700: #297c6b;
+  --teal_700_01: #297d6b;
+  --teal_700_02: #2a7c6b;
+  --teal_900: #194c40;
+  --teal_900_01: #194444;
+  --teal_900_4c: #194c434c;
+  --teal_900_b2: #194d41b2;
+  --white_a700_0a: #ffffff0a;
+  --white_a700_7f: #ffffff7f;
+  --white_a700_b2: #ffffffb2;
+  --white_a700_cc: #ffffffcc;
+  --coral: #ff7777;
+
+  /* ------ Shadow variables ------ */
+  --shadow-xs: 0 10px 50px 0 #0000001e;
+  --shadow-sm: 0 10px 30px 0 #0000001e;
+  --shadow-md: 0 4px 6px 0 #00000014;
+
+  /* ------ Border radius variables ------ */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* ------ Spacing variables ------ */
+  --space-xs: 8px;
+  --space-sm: 10px;
+  --space-md: 12px;
+  --space-lg: 14px;
+  --space-xl: 16px;
+  --space-2xl: 24px;
+  --space-3xl: 26px;
+  --space-4xl: 34px;
+  --space-5xl: 36px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  line-height: normal;
+  font-family: inherit;
+  margin: unset;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+}
+
+ul {
+  margin: 0;
+  margin-inline: unset !important;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input {
+  background-color: transparent;
+  width: 100%;
+}
+
+[type="text"],
+input:where(:not([type])),
+[type="email"],
+[type="url"],
+[type="password"],
+[type="number"],
+[type="date"],
+[type="datetime-local"],
+[type="month"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="week"],
+[multiple],
+textarea,
+select,
+button {
+  appearance: none;
+  background-color: transparent;
+  border-color: unset;
+  border-width: 0;
+  border-radius: unset;
+  padding: unset;
+  font-size: unset;
+  line-height: unset;
+  color: inherit;
+}
+input:focus-visible,
+[multiple]:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+}
+

@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# How to Run the Application
 
-## Getting Started
+This document provides step-by-step instructions for setting up, running, and testing the `jubelio-frontend` Next.js application.
 
-First, run the development server:
+---
+
+## Prerequisites
+
+Before running the application, ensure you have the following installed:
+
+- **Node.js** (v16 or later)
+- **npm** (Node Package Manager) or **yarn**
+
+---
+
+## Setup
+
+### 1. Clone the Repository
+
+Run the following command to clone the repository and navigate to its directory:
+
+```bash
+git clone <repository-url>
+cd jubelio-frontend
+```
+
+### 2. Install Dependencies
+
+Install the required packages:
+
+```bash
+npm install
+```
+
+### 3. Set Up Environment Variables (if needed)
+
+Create a `.env.local` file in the root directory for any required environment variables. Example:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+```
+
+Replace `http://localhost:3000/api` with the base URL of your API.
+
+---
+
+## Running the Application
+
+### Development Mode
+
+To start the application in development mode, run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production Mode
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To build and run the application in production mode:
 
-## Learn More
+1. Build the application:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm run build
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Start the production server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm start
+   ```
 
-## Deploy on Vercel
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Additional Scripts
+
+### Linting
+
+To check for coding standards and errors:
+
+```bash
+npm run lint
+```
+
+### Testing
+
+To run tests (if implemented):
+
+```bash
+npm test
+```
+
+---
+
+## Project Structure
+
+- `pages/`: Contains Next.js page components.
+- `components/`: Contains reusable UI components.
+- `styles/`: Contains global and modular CSS or SCSS files.
+- `stores/`: Contains Zustand store configuration for state management.
+- `public/`: Contains static assets like images.
+
+---
+
+## Notes
+
+- Ensure the API server is running if your application depends on external data.
+- Update the `NEXT_PUBLIC_API_URL` environment variable to match the correct API endpoint.
+- If you encounter any issues, refer to the official Next.js [documentation](https://nextjs.org/docs).
+
+---
+
+## Troubleshooting
+
+- **Port Already in Use**: Stop any processes using the port or start the app on a different port using:
+
+  ```bash
+  PORT=3000 npm run dev
+  ```
+
+- **Dependency Issues**: Delete `node_modules` and `package-lock.json`, then reinstall:
+
+  ```bash
+  rm -rf node_modules package-lock.json
+  npm install
+  ```
+
