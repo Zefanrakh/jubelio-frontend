@@ -7,6 +7,7 @@ import { useProductStore } from "@/stores/productStore";
 import { useEffect, useRef } from "react";
 import styles from "@/styles/products/ProductTable.module.scss";
 import CreateProductButton from "@/components/products/CreateProductButton";
+import LoadingSpinner from "@/components/layout/LoadingSpinner";
 
 export default function Product() {
   const products = useProductStore((state) => state.products);
@@ -42,22 +43,28 @@ export default function Product() {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold text-green-900">Products</h1>
-        <CreateProductButton />
-      </div>
+      {!products.length ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="text-2xl font-bold text-green-900">Products</h1>
+            <CreateProductButton />
+          </div>
 
-      <div className={styles.productTable}>
-        {products.map((product) => (
-          <ProductCard key={product.sku} product={product} />
-        ))}
-      </div>
+          <div className={styles.productTable}>
+            {products.map((product) => (
+              <ProductCard key={product.sku} product={product} />
+            ))}
+          </div>
 
-      {modalOpen && <Modal />}
-      {hasMore && (
-        <div ref={observerRef} className="text-center text-gray-500 py-4">
-          Loading more products...
-        </div>
+          {modalOpen && <Modal />}
+          {hasMore && (
+            <div ref={observerRef} className="text-center text-gray-500 py-4">
+              Loading more products...
+            </div>
+          )}
+        </>
       )}
     </>
   );
