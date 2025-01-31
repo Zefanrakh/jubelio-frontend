@@ -1,8 +1,11 @@
 import { useAdjustmentStore } from "@/stores/adjustmentStore";
 import { useModalStore } from "@/stores/modalStore";
+import { useProductStore } from "@/stores/productStore";
 import { ReadAdjustmentDto } from "@/types/adjustment/ReadAdjustmentDto";
 import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
+import EditButton from "../utils/EditButton";
+import DeleteButton from "../utils/DeleteButton";
 
 export default function AdjustmentAction({
   adjustment,
@@ -11,7 +14,8 @@ export default function AdjustmentAction({
   adjustment: ReadAdjustmentDto;
   afterDeleteRedirection?: string;
 }) {
-  const router = useRouter();
+  /* ----------------------------- STATE HOOK -------------------------------- */
+
   const deleteAdjustment = useAdjustmentStore(
     (state) => state.deleteAdjustment
   );
@@ -19,11 +23,22 @@ export default function AdjustmentAction({
     (state) => state.setSelectedAdjustmentUpdate
   );
   const setModalOpen = useModalStore((state) => state.setModalOpen);
+  const isLoadingProduct = useProductStore((state) => state.isLoading);
+  const isLoadingAdjustment = useAdjustmentStore((state) => state.isLoading);
+
+  /* ----------------------------- HOOK -------------------------------- */
+
+  const router = useRouter();
+
+  /* ----------------------------- FUNCTION -------------------------------- */
 
   const handleEditAdjustment: MouseEventHandler<HTMLButtonElement> = (
     event
   ) => {
     event.stopPropagation();
+    if (isLoadingProduct || isLoadingAdjustment) {
+      return;
+    }
     setSelectedAdjustment(adjustment);
     setModalOpen("adjustment");
   };
@@ -32,26 +47,21 @@ export default function AdjustmentAction({
     event
   ) => {
     event.stopPropagation();
+    if (isLoadingProduct || isLoadingAdjustment) {
+      return;
+    }
     await deleteAdjustment(adjustment.id);
     if (afterDeleteRedirection) {
       router.push(afterDeleteRedirection);
     }
   };
 
+  /* ----------------------------- RENDER -------------------------------- */
+
   return (
     <div className="flex justify-end flex-wrap gap-3">
-      <button
-        className="bg-yellow-500 text-white px-3 py-1 rounded"
-        onClick={handleEditAdjustment}
-      >
-        Edit
-      </button>
-      <button
-        className="bg-red-500 text-white px-3 py-1 rounded"
-        onClick={handleDeleteAdjustment}
-      >
-        Delete
-      </button>
+      <EditButton handleEdit={handleEditAdjustment} />
+      <DeleteButton handleDelete={handleDeleteAdjustment} />
     </div>
   );
 }

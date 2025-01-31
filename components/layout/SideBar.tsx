@@ -7,7 +7,20 @@ import { useSidebarStore } from "@/stores/sidebarStore";
 import { useEffect } from "react";
 
 export default function SideBar() {
+  /* ----------------------------- VARIABLES -------------------------------- */
+
+  const pathname = usePathname();
+
+  const menuItems = [
+    { name: "Products", path: "/products" },
+    { name: "Adjustments", path: "/adjustments" },
+  ];
+
+  /* ----------------------------- STATE HOOK -------------------------------- */
+
   const { open, setSidebarOpen } = useSidebarStore();
+
+  /* ----------------------------- HOOK -------------------------------- */
 
   useEffect(() => {
     const handleResize = () => {
@@ -18,21 +31,18 @@ export default function SideBar() {
       }
     };
 
+    /* ----------------------------- FUNCTION HOOK -------------------------------- */
+
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const pathname = usePathname();
-
-  const menuItems = [
-    { name: "Products", path: "/products" },
-    { name: "Adjustments", path: "/adjustments" },
-  ];
-
   const handleOverlayClick = () => {
     setSidebarOpen(false);
   };
+
+  /* ----------------------------- RENDER -------------------------------- */
 
   return (
     <div

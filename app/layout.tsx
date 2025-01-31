@@ -15,6 +15,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  /* ----------------------------- RENDER -------------------------------- */
+
   return (
     <html lang="en" data-theme="light">
       <body style={{ backgroundColor: "var(--white_a700_b2)" }}>

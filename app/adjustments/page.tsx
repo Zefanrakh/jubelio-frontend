@@ -9,12 +9,11 @@ import AdjustmentAction from "@/components/adjustments/AdjustmentAction";
 import Modal from "@/components/layout/Modal";
 import { useModalStore } from "@/stores/modalStore";
 import CreateAdjustmentButton from "@/components/adjustments/CreateAdjustmentButton";
-import LoadingSpinner from "@/components/layout/LoadingSpinner";
+import LoadingSpinnerContainer from "@/components/layout/LoadingSpinnerContainer";
 
 const AdjustmentTable = () => {
-  const searchParams = useSearchParams();
-  const currentPage = parseInt(searchParams.get("page") || "1", 10);
-  const router = useRouter();
+  /* ----------------------------- STATE HOOK -------------------------------- */
+
   const fetchAdjustments = useAdjustmentStore(
     (state) => state.fetchAdjustments
   );
@@ -22,9 +21,16 @@ const AdjustmentTable = () => {
   const totalPages = useAdjustmentStore((state) => state.totalPages);
   const modalOpen = useModalStore((state) => state.open);
 
+  /* ----------------------------- HOOK -------------------------------- */
+
+  const searchParams = useSearchParams();
+  const currentPage = parseInt(searchParams.get("page") || "1", 10);
+  const router = useRouter();
   useEffect(() => {
     fetchAdjustments(currentPage);
   }, []);
+
+  /* ----------------------------- FUNCTION -------------------------------- */
 
   const handlePageChange = (page: number) => {
     router.push(`/adjustments?page=${page}`);
@@ -34,10 +40,12 @@ const AdjustmentTable = () => {
     router.push(`/adjustments/${id}`);
   };
 
+  /* ----------------------------- RENDER -------------------------------- */
+
   return (
     <>
       {!adjustments.length ? (
-        <LoadingSpinner />
+        <LoadingSpinnerContainer />
       ) : (
         <>
           <div className="flex justify-between items-center mb-4">

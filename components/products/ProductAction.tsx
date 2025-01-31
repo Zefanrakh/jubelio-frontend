@@ -1,8 +1,12 @@
+import { useAdjustmentStore } from "@/stores/adjustmentStore";
 import { useModalStore } from "@/stores/modalStore";
 import { useProductStore } from "@/stores/productStore";
 import { ReadProductDto } from "@/types/product/ReadProductDto";
 import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
+import LoadingSpinner from "../layout/LoadingSpinner";
+import EditButton from "../utils/EditButton";
+import DeleteButton from "../utils/DeleteButton";
 
 export default function ProductAction({
   product,
@@ -12,14 +16,24 @@ export default function ProductAction({
   afterDeleteRedirection?: string;
 }) {
   const router = useRouter();
+
+  /* ----------------------------- STATE HOOK -------------------------------- */
+
   const deleteProduct = useProductStore((state) => state.deleteProduct);
   const setSelectedProduct = useProductStore(
     (state) => state.setSelectedProductUpdate
   );
   const setModalOpen = useModalStore((state) => state.setModalOpen);
+  const isLoadingProduct = useProductStore((state) => state.isLoading);
+  const isLoadingAdjustment = useAdjustmentStore((state) => state.isLoading);
+
+  /* ----------------------------- FUNCTION -------------------------------- */
 
   const handleEditProduct: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
+    if (isLoadingProduct || isLoadingAdjustment) {
+      return;
+    }
     setSelectedProduct(product);
     setModalOpen("product");
   };
@@ -28,26 +42,21 @@ export default function ProductAction({
     event
   ) => {
     event.stopPropagation();
+    if (isLoadingProduct || isLoadingAdjustment) {
+      return;
+    }
     await deleteProduct(product.id);
     if (afterDeleteRedirection) {
       router.push(afterDeleteRedirection);
     }
   };
 
+  /* ----------------------------- RENDER -------------------------------- */
+
   return (
     <div className="flex justify-between flex-wrap gap-3">
-      <button
-        className="bg-yellow-500 text-white px-3 py-1 rounded"
-        onClick={handleEditProduct}
-      >
-        Edit
-      </button>
-      <button
-        className="bg-red-500 text-white px-3 py-1 rounded"
-        onClick={handleDeleteProduct}
-      >
-        Delete
-      </button>
+      <EditButton handleEdit={handleEditProduct} />
+      <DeleteButton handleDelete={handleDeleteProduct} />
     </div>
   );
 }

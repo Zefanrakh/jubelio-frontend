@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { ReadAdjustmentDto } from "@/types/adjustment/ReadAdjustmentDto";
 import { useProductStore } from "@/stores/productStore";
 import { ReadProductDto } from "@/types/product/ReadProductDto";
+import FormSubmitButton from "../utils/FormSubmitButton";
+import { FormCancelButton } from "../utils/FormCancelButton";
 
 export default function AdjustmentForm({
   adjustment,
@@ -18,6 +20,8 @@ export default function AdjustmentForm({
   onClose?: () => void;
   noCancel?: boolean;
 }) {
+  /* ----------------------------- STATE HOOK -------------------------------- */
+
   const createAdjustment = useAdjustmentStore(
     (state) => state.createAdjustment
   );
@@ -36,6 +40,8 @@ export default function AdjustmentForm({
     sku: adjustment?.sku || "",
     qty: adjustment?.qty || 0,
   });
+
+  /* ----------------------------- FUNCTION -------------------------------- */
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -59,6 +65,8 @@ export default function AdjustmentForm({
     onClose?.();
   };
 
+  /* ----------------------------- HOOK -------------------------------- */
+
   useEffect(() => {
     fetchProductsNoPagination();
   }, []);
@@ -68,6 +76,8 @@ export default function AdjustmentForm({
       setFormData((prev) => ({ ...prev, sku: selectedProduct.sku }));
     }
   }, [selectedProduct]);
+
+  /* ----------------------------- RENDER -------------------------------- */
 
   return (
     <form onSubmit={handleSubmit}>
@@ -106,25 +116,8 @@ export default function AdjustmentForm({
         </div>
 
         <div className="flex justify-end">
-          {!noCancel && (
-            <button
-              type="button"
-              className="text-white px-4 py-2 rounded mr-2"
-              style={{
-                background: "var(--coral)",
-              }}
-              onClick={() => onClose?.()}
-            >
-              Cancel
-            </button>
-          )}
-          <button
-            type="submit"
-            className="bg-white px-4 py-2 rounded font-bold"
-            style={{ color: "var(--teal_300)" }}
-          >
-            {adjustment ? "Update" : "Create"}
-          </button>
+          {!noCancel && <FormCancelButton onClick={() => onClose?.()} />}
+          <FormSubmitButton label={adjustment ? "Update" : "Create"} />
         </div>
       </div>
     </form>

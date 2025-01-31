@@ -7,25 +7,28 @@ import { useModalStore } from "@/stores/modalStore";
 import { useAdjustmentStore } from "@/stores/adjustmentStore";
 import AdjustmentAction from "@/components/adjustments/AdjustmentAction";
 import dayjs from "dayjs";
+import LoadingSpinnerContainer from "@/components/layout/LoadingSpinnerContainer";
 
 export default function AdjustmentDetail() {
-  const { id } = useParams();
+  /* ----------------------------- STATE HOOK -------------------------------- */
+
   const getAdjustment = useAdjustmentStore((state) => state.getAdjustment);
   const adjustment = useAdjustmentStore(
     (state) => state.selectedAdjustmentDetail
   );
   const modalOpen = useModalStore((state) => state.open);
 
+  /* ----------------------------- HOOK -------------------------------- */
+
+  const { id } = useParams();
   useEffect(() => {
     getAdjustment(id as string);
   }, [id]);
 
+  /* ----------------------------- RENDER -------------------------------- */
+
   if (!adjustment) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg font-bold">Loading adjustment details...</p>
-      </div>
-    );
+    return <LoadingSpinnerContainer />;
   }
 
   return (

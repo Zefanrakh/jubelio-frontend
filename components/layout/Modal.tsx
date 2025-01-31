@@ -6,12 +6,18 @@ import { useAdjustmentStore } from "@/stores/adjustmentStore";
 import AdjustmentForm from "../adjustments/AdjustmentForm";
 
 export default function Modal() {
-  const selectedProduct = useProductStore((state) => state.selectedProductUpdate);
+  /* ----------------------------- STATE HOOK -------------------------------- */
+
+  const selectedProduct = useProductStore(
+    (state) => state.selectedProductUpdate
+  );
   const selectedAdjustment = useAdjustmentStore(
     (state) => state.selectedAdjustmentUpdate
   );
   const setModalOpen = useModalStore((state) => state.setModalOpen);
   const modalType = useModalStore((state) => state.modalType);
+
+  /* ----------------------------- RENDER -------------------------------- */
 
   return (
     <div className={style.overlay} onClick={() => setModalOpen()}>

@@ -4,6 +4,8 @@ import { ReadProductDto } from "@/types/product/ReadProductDto";
 import { UpdateProductDto } from "@/types/product/UpdateProductDto";
 import { useState } from "react";
 import style from "@/styles/Input.module.scss";
+import FormSubmitButton from "../utils/FormSubmitButton";
+import { FormCancelButton } from "../utils/FormCancelButton";
 
 export default function ProductForm({
   product,
@@ -12,8 +14,9 @@ export default function ProductForm({
   product: ReadProductDto;
   onClose: () => void;
 }) {
-  const { createProduct, updateProduct } = useProductStore();
+  /* ----------------------------- STATE HOOK -------------------------------- */
 
+  const { createProduct, updateProduct } = useProductStore();
   const [formData, setFormData] = useState<UpdateProductDto | CreateProductDto>(
     {
       title: product?.title || "",
@@ -23,6 +26,8 @@ export default function ProductForm({
       description: product?.description || "",
     }
   );
+
+  /* ----------------------------- FUNCTION -------------------------------- */
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -42,6 +47,8 @@ export default function ProductForm({
 
     onClose();
   };
+
+  /* ----------------------------- RENDER -------------------------------- */
 
   return (
     <form onSubmit={handleSubmit}>
@@ -115,23 +122,8 @@ export default function ProductForm({
           </fieldset>
         </div>
         <div className="flex justify-end">
-          <button
-            type="button"
-            className="text-white px-4 py-2 rounded mr-2"
-            style={{
-              background: "var(--coral)",
-            }}
-            onClick={onClose}
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="bg-white px-4 py-2 rounded font-bold"
-            style={{ color: "var(--teal_300)" }}
-          >
-            {product ? "Update" : "Create"}
-          </button>
+          <FormCancelButton onClick={onClose} />
+          <FormSubmitButton label={product ? "Update" : "Create"} />
         </div>
       </div>
     </form>

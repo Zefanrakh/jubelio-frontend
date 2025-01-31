@@ -8,23 +8,26 @@ import style from "@/styles/Modal.module.scss";
 import ProductAction from "@/components/products/ProductAction";
 import Modal from "@/components/layout/Modal";
 import { useModalStore } from "@/stores/modalStore";
+import LoadingSpinnerContainer from "@/components/layout/LoadingSpinnerContainer";
 
 export default function ProductDetail() {
-  const { id } = useParams();
+  /* ----------------------------- STATE HOOK -------------------------------- */
+
   const getProduct = useProductStore((state) => state.getProduct);
   const product = useProductStore((state) => state.selectedProductDetail);
   const modalOpen = useModalStore((state) => state.open);
 
+  /* ----------------------------- HOOK -------------------------------- */
+
+  const { id } = useParams();
   useEffect(() => {
     getProduct(id as string);
   }, [id]);
 
+  /* ----------------------------- RENDER -------------------------------- */
+
   if (!product) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg font-bold">Loading product details...</p>
-      </div>
-    );
+    return <LoadingSpinnerContainer />;
   }
 
   return (

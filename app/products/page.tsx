@@ -7,14 +7,19 @@ import { useProductStore } from "@/stores/productStore";
 import { useEffect, useRef } from "react";
 import styles from "@/styles/products/ProductTable.module.scss";
 import CreateProductButton from "@/components/products/CreateProductButton";
+import LoadingSpinnerContainer from "@/components/layout/LoadingSpinnerContainer";
 import LoadingSpinner from "@/components/layout/LoadingSpinner";
 
 export default function Product() {
+  /* ----------------------------- STATE HOOK -------------------------------- */
+
   const products = useProductStore((state) => state.products);
   const fetchProducts = useProductStore((state) => state.fetchProducts);
   const hasMore = useProductStore((state) => state.hasMore);
   const modalOpen = useModalStore((state) => state.open);
   const observerRef = useRef<HTMLDivElement | null>(null);
+
+  /* ----------------------------- HOOK -------------------------------- */
 
   useEffect(() => {
     fetchProducts();
@@ -41,10 +46,12 @@ export default function Product() {
     };
   }, [hasMore]);
 
+  /* ----------------------------- RENDER -------------------------------- */
+
   return (
     <>
       {!products.length ? (
-        <LoadingSpinner />
+        <LoadingSpinnerContainer />
       ) : (
         <>
           <div className="flex justify-between items-center mb-4">
@@ -61,7 +68,7 @@ export default function Product() {
           {modalOpen && <Modal />}
           {hasMore && (
             <div ref={observerRef} className="text-center text-gray-500 py-4">
-              Loading more products...
+              <LoadingSpinner className="!w-[30px] !h-[30px]" />
             </div>
           )}
         </>

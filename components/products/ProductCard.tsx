@@ -6,9 +6,13 @@ import ProductAction from "./ProductAction";
 export default function ProductCard({ product }: { product: ReadProductDto }) {
   const router = useRouter();
 
+  /* ----------------------------- FUNCTION -------------------------------- */
+
   const handleCardClick = () => {
     router.push(`/products/${product.id}`);
   };
+
+  /* ----------------------------- RENDER -------------------------------- */
 
   return (
     <div
